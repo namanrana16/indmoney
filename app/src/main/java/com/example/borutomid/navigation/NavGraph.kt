@@ -1,13 +1,19 @@
 package com.example.borutomid.navigation
 
 import android.window.SplashScreen
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.borutomid.presentation.screens.home.HomeScreen
 import com.example.borutomid.presentation.screens.splash.SplashScreen
+import com.example.borutomid.presentation.screens.welcome.WelcomeScreen
 import com.example.borutomid.util.Constants.DETAILS_ARGUMENT_KEY
+import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
 @Composable
 fun SetupNavGraph(navController: NavHostController){
 
@@ -19,11 +25,12 @@ fun SetupNavGraph(navController: NavHostController){
         }
 
         composable(route = Screen.Welcome.route){
-
+            WelcomeScreen(navController = navController)
         }
 
         composable(route = Screen.Home.route){
 
+            HomeScreen()
         }
 
         composable(route = Screen.Details.route,
