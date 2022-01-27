@@ -12,6 +12,7 @@ import androidx.compose.runtime.ControlledComposition
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.annotation.ExperimentalCoilApi
 import com.example.borutomid.navigation.SetupNavGraph
 import com.example.borutomid.ui.theme.BorutoMidTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -20,6 +21,8 @@ import java.security.AccessController
 
 
 @ExperimentalAnimationApi
+
+@ExperimentalCoilApi
 @ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

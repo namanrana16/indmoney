@@ -1,6 +1,10 @@
 package com.example.borutomid.di
 
+import androidx.paging.ExperimentalPagingApi
+import com.example.borutomid.data.local.BorutoDatabase
 import com.example.borutomid.data.remote.BorutoApi
+import com.example.borutomid.data.repository.RemoteDataSourceImpl
+import com.example.borutomid.domain.repository.RemoteDataSource
 import com.example.borutomid.util.Constants.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -16,6 +20,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @ExperimentalSerializationApi
+@ExperimentalPagingApi
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -51,6 +56,18 @@ object NetworkModule {
     fun provideBorutoApi(retrofit: Retrofit):BorutoApi
     {
           return   retrofit.create(BorutoApi::class.java)
+    }
+
+
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        borutoApi: BorutoApi, borutoDatabase: BorutoDatabase
+    ):RemoteDataSource
+    {
+
+        return RemoteDataSourceImpl(borutoDatabase = borutoDatabase, borutoApi = borutoApi)
     }
 
 }
