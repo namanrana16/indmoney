@@ -5,7 +5,6 @@ import com.example.borutomid.domain.model.Hero
 import com.example.borutomid.domain.repository.DataStoreOperations
 import com.example.borutomid.domain.repository.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
-import java.security.PrivateKey
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -17,6 +16,13 @@ class Repository @Inject constructor(
     fun getAllHeroes():Flow<PagingData<Hero>>
     {
         return remote.getAllHeroes()
+    }
+
+
+    fun searchHeroes(query:String):Flow<PagingData<Hero>>
+    {
+
+        return remote.searchHeroes(query = query)
     }
 
     suspend fun savedOnBoardingState(completed:Boolean){

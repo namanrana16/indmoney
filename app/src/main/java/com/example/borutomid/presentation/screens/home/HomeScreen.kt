@@ -9,6 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.example.borutomid.navigation.Screen
 import com.example.borutomid.presentation.common.ListContent
 import com.example.borutomid.presentation.components.RatingWidget
 
@@ -19,7 +20,9 @@ fun HomeScreen(
     homeViewModel: HomeViewModel= hiltViewModel())
 {
 val allHeroes=homeViewModel.getAllHeroes.collectAsLazyPagingItems()
-    Scaffold(topBar = { HomeTopBar(onSearchClicked = {})
+    Scaffold(topBar = { HomeTopBar(onSearchClicked = {
+        navController.navigate(Screen.Search.route)
+    })
 
     },
         content = {

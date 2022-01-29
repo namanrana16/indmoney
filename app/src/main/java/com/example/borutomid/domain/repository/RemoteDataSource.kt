@@ -7,6 +7,6 @@ import java.util.concurrent.Flow
 interface RemoteDataSource
 {
     fun getAllHeroes():kotlinx.coroutines.flow.Flow<PagingData<Hero>>
-    fun searchAllData():kotlinx.coroutines.flow.Flow<PagingData<Hero>>
+    fun searchHeroes(query:String):kotlinx.coroutines.flow.Flow<PagingData<Hero>>
 
 }

@@ -82,8 +82,8 @@ class HeroRemoteMediator @Inject constructor(
 
     val currentTime=System.currentTimeMillis()
         val lastUpdated=heroRemoteKeysDao.getRemoteKeys(1)?.lastUpdated?:0L
-        val cacheTimeout=5
-        val diffInMinutes=(currentTime-lastUpdated)/60000
+        val cacheTimeout=1200
+        val diffInMinutes=(currentTime-lastUpdated)/1000/60
 
         return  if(diffInMinutes.toInt()<=cacheTimeout)
         {
