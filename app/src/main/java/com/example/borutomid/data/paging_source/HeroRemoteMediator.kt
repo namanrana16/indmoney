@@ -59,7 +59,7 @@ class HeroRemoteMediator @Inject constructor(
                     val prevPage=response.prevPage
                     val nextPage=response.nextPage
                     val keys = response.heroes.map {
-                        HeroRemoteKeys(id = it.id, prevPage = prevPage, nextPage = nextPage)
+                        HeroRemoteKeys(id = it.id, prevPage = prevPage, nextPage = nextPage, lastUpdated = response.lastUpdated)
                     }
                     heroRemoteKeysDao.addAllRemoteKey(keys)
                     heroDao.addHeroes(response.heroes)
@@ -74,6 +74,28 @@ class HeroRemoteMediator @Inject constructor(
             return MediatorResult.Error(e)
         }
     }
+
+
+
+
+    override suspend fun initialize(): InitializeAction {
+
+    val currentTime=System.currentTimeMillis()
+        val lastUpdated=heroRemoteKeysDao.getRemoteKeys(1)?.lastUpdated?:0L
+        val cacheTimeout=5
+        val diffInMinutes=(currentTime-lastUpdated)/60000
+
+        return  if(diffInMinutes.toInt()<=cacheTimeout)
+        {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }else{
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+
+    }
+
+
+
 
     private suspend fun heroRemoteKeyForLastPosition(state: PagingState<Int, Hero>): HeroRemoteKeys?{
 

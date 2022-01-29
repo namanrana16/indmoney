@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
@@ -27,6 +28,7 @@ import com.example.borutomid.R
 import com.example.borutomid.domain.model.Hero
 import com.example.borutomid.navigation.Screen
 import com.example.borutomid.presentation.components.RatingWidget
+import com.example.borutomid.presentation.components.ShimmerEffect
 import com.example.borutomid.ui.theme.Shapes
 import com.example.borutomid.ui.theme.topAppBarContent
 import com.example.borutomid.util.Constants.BASE_URL
@@ -36,21 +38,65 @@ import com.example.borutomid.util.Constants.BASE_URL
 fun ListContent(heroes:LazyPagingItems<Hero>,navController:NavHostController)
 {
 
-    LazyColumn(contentPadding = PaddingValues(all=10.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp))
+    val result = handlePagingResult(heroes = heroes)
+    if(result)
     {
-        items(items=heroes,key={hero->
-            hero.id
+        LazyColumn(contentPadding = PaddingValues(all=10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp))
+        {
+            items(items=heroes,key={hero->
+                hero.id
 
-        }){hero->
-            hero?.let { HeroItem(hero = it, navController =navController ) }
+            }){hero->
+                hero?.let { HeroItem(hero = it, navController =navController ) }
 
+            }
         }
     }
 
 
+
+
     
 }
+
+
+
+
+@Composable
+fun handlePagingResult(heroes:LazyPagingItems<Hero>):Boolean{
+
+
+    heroes.apply {
+      val error= when{
+          loadState.refresh is LoadState.Error-> loadState.refresh as LoadState.Error
+          loadState.prepend is LoadState.Error-> loadState.prepend as LoadState.Error
+          loadState.append is LoadState.Error-> loadState.append as LoadState.Error
+          else -> null
+      }
+        return when{
+            loadState.refresh is LoadState.Loading-> {
+                ShimmerEffect()
+            false
+            }
+error!=null->
+{
+    false
+
+}
+
+            else ->true
+        }
+    }
+}
+
+
+
+
+
+
+
+
 
 @ExperimentalCoilApi
 @Composable
