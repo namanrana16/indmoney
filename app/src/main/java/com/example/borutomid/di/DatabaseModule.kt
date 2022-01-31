@@ -3,6 +3,8 @@ package com.example.borutomid.di
 import android.content.Context
 import androidx.room.Room
 import com.example.borutomid.data.local.BorutoDatabase
+import com.example.borutomid.data.repository.LocalDataSourceImpl
+import com.example.borutomid.domain.repository.LocalDataSource
 import com.example.borutomid.util.Constants.BORUTO_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -25,4 +27,12 @@ object DatabaseModule {
             context,BorutoDatabase::class.java,
                 BORUTO_DATABASE
     ).build()
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(database:BorutoDatabase):LocalDataSource
+    {
+
+         return LocalDataSourceImpl(borutoDatabase = database )
+    }
 }

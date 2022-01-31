@@ -1,5 +1,6 @@
 package com.example.borutomid.presentation.screens.search
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,6 +10,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.example.borutomid.navigation.Screen
 import com.example.borutomid.presentation.common.ListContent
+import com.example.borutomid.ui.theme.statusBarColor
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalCoilApi
 @Composable
@@ -18,6 +21,11 @@ searchViewModel: SearchViewModel= hiltViewModel())
 
     val searchQuery by searchViewModel.searchQuery
     val heroes= searchViewModel.searchHeroes.collectAsLazyPagingItems()
+
+
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
 
 Scaffold(topBar = { SearchTopBar(text = searchQuery,
 

@@ -1,9 +1,13 @@
 package com.example.borutomid.presentation.screens.home
 
+
+import android.graphics.Color.parseColor
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -12,6 +16,8 @@ import coil.annotation.ExperimentalCoilApi
 import com.example.borutomid.navigation.Screen
 import com.example.borutomid.presentation.common.ListContent
 import com.example.borutomid.presentation.components.RatingWidget
+import com.example.borutomid.ui.theme.statusBarColor
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalCoilApi
 @Composable
@@ -20,6 +26,15 @@ fun HomeScreen(
     homeViewModel: HomeViewModel= hiltViewModel())
 {
 val allHeroes=homeViewModel.getAllHeroes.collectAsLazyPagingItems()
+
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
+
+
+
+
+
     Scaffold(topBar = { HomeTopBar(onSearchClicked = {
         navController.navigate(Screen.Search.route)
     })
