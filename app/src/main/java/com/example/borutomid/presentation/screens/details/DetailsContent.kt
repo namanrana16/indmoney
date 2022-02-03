@@ -39,7 +39,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun DetailsContent(navController:NavHostController,selectedHero: Hero?,colors:Map<String,String>)
 {
-    Log.d("VM khula nhi3","VM khula nhi3")
+
 
     var vibrant by remember {
         mutableStateOf("#000000")
@@ -65,7 +65,10 @@ fun DetailsContent(navController:NavHostController,selectedHero: Hero?,colors:Ma
     }
 
     val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(color = Color(parseColor(darkVibrant)))
+    SideEffect {
+        systemUiController.setStatusBarColor(color = Color(parseColor(darkVibrant)))
+    }
+
 
 
 
@@ -187,7 +190,7 @@ fun BottomSheetContent(selectedHero: Hero,infoBoxIconColor: Color = MaterialThem
                 .weight(2f),
                 painter = painterResource(id = com.example.borutomid.R.drawable.ic_logo_svg),
                 contentDescription = "Logo",
-                tint = contentColor
+                tint = infoBoxIconColor
             )
             Text(modifier=Modifier.weight(8f),
                 text = selectedHero.name,

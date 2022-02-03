@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 @ExperimentalMaterialApi
 fun DetailsScreen(navController:NavHostController,detailsViewModel: DetailsViewModel = hiltViewModel())
 {
-    Log.d("VM khula nhi2z","VM khula nhi")
+
     val selectedHero by detailsViewModel.selectedHero.collectAsState()
 
     val colorPalette by detailsViewModel.colorPalette

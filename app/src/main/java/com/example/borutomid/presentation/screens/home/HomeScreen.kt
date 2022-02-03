@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -29,13 +30,16 @@ val allHeroes=homeViewModel.getAllHeroes.collectAsLazyPagingItems()
 
 
     val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
+    val systemBarcolor= MaterialTheme.colors.statusBarColor
+    SideEffect {
+        systemUiController.setStatusBarColor(color =systemBarcolor)
+    }
 
 
 
 
 
-    Scaffold(topBar = { HomeTopBar(onSearchClicked = {
+        Scaffold(topBar = { HomeTopBar(onSearchClicked = {
         navController.navigate(Screen.Search.route)
     })
 
