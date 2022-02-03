@@ -1,5 +1,5 @@
 # JetPack-Compose-with-Ktor-Backend
-App made with Jetpack Compose using MVVM arch and Remote Mediator for caching with custom Back-end made in Kotlin using Ktor.
+App made with Jetpack Compose using MVVM arch and Remote Mediator for caching with custom Back-end made in Kotlin using Ktor and Palette API for dynamically extracting colors from image and using it in content.
 
 ![1](https://user-images.githubusercontent.com/47075510/151428035-ed051f9f-29e1-4bea-93f3-8ea91a9e5114.jpeg)
 
