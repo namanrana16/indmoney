@@ -2,7 +2,6 @@ package com.example.borutomid.presentation.screens.details
 
 
 import android.graphics.Color.parseColor
-import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,12 +13,10 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.R
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.createTextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,7 +24,6 @@ import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.borutomid.domain.model.Hero
-import com.example.borutomid.presentation.common.parseErrorMessage
 import com.example.borutomid.presentation.components.InfoBox
 import com.example.borutomid.presentation.components.OrderedList
 import com.example.borutomid.ui.theme.titleColor
@@ -208,23 +204,6 @@ fun BottomSheetContent(selectedHero: Hero,infoBoxIconColor: Color = MaterialThem
             horizontalArrangement = Arrangement.SpaceBetween
                 ){
 
-            InfoBox(icon = painterResource(id = com.example.borutomid.R.drawable.ic_bolt),
-                iconColor = infoBoxIconColor,
-                bigText = "${selectedHero.power}",
-                smallText = "Power",
-                textColor = contentColor)
-
-            InfoBox(icon = painterResource(id = com.example.borutomid.R.drawable.ic_calendar),
-                iconColor = infoBoxIconColor,
-                bigText = selectedHero.month,
-                smallText = "Month",
-                textColor = contentColor)
-
-            InfoBox(icon = painterResource(id = com.example.borutomid.R.drawable.ic_cake),
-                iconColor = infoBoxIconColor,
-                bigText =  selectedHero.day,
-                smallText = "Birthday",
-                textColor = contentColor)
 
         }
 
@@ -246,15 +225,7 @@ fun BottomSheetContent(selectedHero: Hero,infoBoxIconColor: Color = MaterialThem
             maxLines = 7
           )
         
-        
-        Row(modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
 
-            OrderedList(title = "Family", items = selectedHero.family, textColor = contentColor)
-            OrderedList(title = "Abilities", items = selectedHero.abilities, textColor = contentColor)
-            OrderedList(title = "Nature Types", items = selectedHero.natureTypes, textColor = contentColor)
-        }
 
 
     }

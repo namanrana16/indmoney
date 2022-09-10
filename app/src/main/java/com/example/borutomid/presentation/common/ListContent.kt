@@ -113,19 +113,21 @@ fun HeroItem(hero:Hero,navController: NavHostController)
         error(R.drawable.ic_logo_svg)
     }
 
-    Box(
-        modifier = Modifier
-            .height(400.dp)
+    Row(
+        modifier = Modifier.fillMaxWidth()
             .clickable { navController.navigate(Screen.Details.passHeroId(heroId = hero.id)) },
-        contentAlignment = Alignment.BottomStart
+         horizontalArrangement = Arrangement.Start
+
 
     ){
-        androidx.compose.material.Surface(shape = RoundedCornerShape(size = 20.dp)) {
-            Image(modifier = Modifier.fillMaxSize(),painter = painter, contentDescription = "Hero Image", contentScale = ContentScale.Crop)
-            
+        Surface() {
+            Image(modifier = Modifier.height(100.dp).width(80.dp).padding(all = 5.dp),painter = painter, contentDescription = "Hero Image", contentScale = ContentScale.Crop)
+
         }
-        androidx.compose.material.Surface(modifier = Modifier
-            .fillMaxHeight(0.4f)
+
+        Spacer(modifier = Modifier.width(5.dp))
+
+        Surface(modifier = Modifier
             .fillMaxWidth(),
 
             color = Color.Black.copy(alpha = ContentAlpha.medium),
@@ -133,8 +135,7 @@ fun HeroItem(hero:Hero,navController: NavHostController)
             shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
         {
 
-            Column(modifier= Modifier
-                .fillMaxSize()
+            Column(modifier= Modifier.fillMaxWidth()
                 .padding(all = 7.dp)) {
 
                 Text(text = hero.name,
@@ -156,15 +157,7 @@ fun HeroItem(hero:Hero,navController: NavHostController)
 
                     )
 
-                Row(modifier = Modifier.padding(top=4.dp),
-                    verticalAlignment = Alignment.CenterVertically)
-                {
-                    RatingWidget(modifier = Modifier.padding(end = 5.dp), rating =hero.rating )
-                    Text(text = "(${hero.rating})",
-                        textAlign = TextAlign.Center,
-                        color = Color.White.copy(alpha = ContentAlpha.medium))
 
-                }
 
             }
 
@@ -183,7 +176,7 @@ fun HeroItem(hero:Hero,navController: NavHostController)
 fun HeroItemPreview()
 {
     HeroItem(hero = Hero(id=1, name = "Susuke", image = "",
-        about = "randwa text to lorem ipsum lowda lassun",
+        about = "text to lorem ipsum",
         rating = 4.3,
         power = 9000,
         month = "May", day = "", family = listOf(),
